@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoTaskService } from 'src/app/core/services/todo-task.service';
-import TodoTask from '../todo-task';
+import { TodoTask } from '../todo-task';
 
 @Component({
   selector: 'app-todo-task-list',
@@ -9,12 +9,17 @@ import TodoTask from '../todo-task';
 })
 export class TodoTaskListComponent implements OnInit {
 
-  testData: Array<TodoTask>;
+  todoTasks: Array<TodoTask> = [];
+  displayedColumns: string[] = ['id', 'text', 'isDone', 'isDeleted'];
 
   constructor(private todoTaskService: TodoTaskService) { }
 
   ngOnInit(): void {
-
+    this.todoTaskService.getAll().subscribe((data: any) => {
+      this.todoTasks = data;
+    }, (error: any) => {
+      console.log("Error at calling api");
+    });
   }
 
 }
