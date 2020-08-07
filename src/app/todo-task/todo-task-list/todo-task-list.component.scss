@@ -1,3 +1,29 @@
 table {
   width: 100%;
 }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-form-field:nth-child(1) {
+  margin-right: 10px;
+}
+
+mat-form-field:nth-child(2) {
+  margin-left: 10px;
+}
+
+.action-button {
+  margin-right: 8px;
+}
