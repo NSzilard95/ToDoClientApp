@@ -9,7 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const materialModules = [
   MatButtonModule,
@@ -19,7 +20,9 @@ const materialModules = [
   MatIconModule,
   MatCheckboxModule,
   MatSelectModule,
-  MatSortModule
+  MatSortModule,
+  MatDialogModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

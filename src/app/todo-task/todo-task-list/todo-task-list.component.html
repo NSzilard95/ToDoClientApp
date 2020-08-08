@@ -12,6 +12,8 @@
     <mat-label>Filter todos</mat-label>
     <input matInput (keyup)="applyFilter($event)">
   </mat-form-field>
+
+  <button mat-raised-button class="create-button" [routerLink]="['/todo/create']">New</button>
 </div>
 
 <table mat-table [dataSource]="todoTasks" class="mat-elevation-z8" matSort>
@@ -39,9 +41,9 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <button class="action-button" mat-raised-button>Edit</button>
-      <button class="action-button" mat-raised-button color="primary">Done</button>
-      <button class="action-button" mat-raised-button color="warn">Delete</button>
+      <button class="action-button" mat-raised-button [routerLink]="['/todo/edit', element.id]">Edit</button>
+      <button *ngIf="element.isDone === false" class="action-button" mat-raised-button color="primary" (click)="openSetDoneDialog(element.id)">Done</button>
+      <button class="action-button" mat-raised-button color="warn" (click)="openDeleteDialog(element.id)">Delete</button>
     </td>
   </ng-container>
 

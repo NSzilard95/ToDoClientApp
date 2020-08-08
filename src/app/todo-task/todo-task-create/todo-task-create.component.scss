@@ -1,0 +1,29 @@
+form {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width: 500px;
+}
+
+.form-field {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form.create-form {
+  width: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.create-button {
+  margin-top: 15px;
+  margin-right: 15px;
+}

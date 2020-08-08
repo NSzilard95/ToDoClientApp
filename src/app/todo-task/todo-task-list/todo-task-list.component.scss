@@ -2,9 +2,17 @@ table {
   width: 100%;
 }
 
-.mat-form-field {
+mat-form-field {
   font-size: 14px;
   width: 100%;
+}
+
+mat-form-field:nth-child(1) {
+  margin-right: 10px;
+}
+
+mat-form-field:nth-child(2) {
+  margin-left: 10px;
 }
 
 td, th {
@@ -16,14 +24,11 @@ td, th {
   flex-direction: row;
 }
 
-mat-form-field:nth-child(1) {
-  margin-right: 10px;
-}
-
-mat-form-field:nth-child(2) {
-  margin-left: 10px;
-}
-
 .action-button {
   margin-right: 8px;
+  width: 80px;
+}
+
+.create-button {
+  margin: 8px 5px;
 }

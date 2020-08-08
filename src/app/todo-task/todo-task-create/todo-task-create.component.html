@@ -1,1 +1,23 @@
-<p>todo-task-create works!</p>
+<div class="container">
+  <!-- Create form -->
+  <form class="todo-create-form" [formGroup]="todoCreateForm" (ngSubmit)="onSubmit()">
+    <h3>Create new todo</h3>
+    <!-- Todo text -->
+    <mat-form-field class="form-field">
+      <mat-label>Todo text</mat-label>
+      <textarea matInput type="text" formControlName="todoText" rows="10"></textarea>
+      <mat-error *ngIf="errorHandling('todoText', 'required')">
+        You must provide a <strong>Todo text</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Create button -->
+    <button class="create-button" mat-raised-button [disabled]="loading">
+      <span *ngIf="loading"></span>
+      Create
+    </button>
+    <button class="create-button" mat-raised-button [routerLink]="['/todo']">
+      Back
+    </button>
+  </form>
+</div>
