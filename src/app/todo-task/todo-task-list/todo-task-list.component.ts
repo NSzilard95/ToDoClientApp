@@ -16,54 +16,108 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./todo-task-list.component.scss']
 })
 export class TodoTaskListComponent implements OnInit {
+  /**
+   * The displayed columns in table
+   */
   displayedColumns: string[] = ['id', 'text', 'isDone', 'actions'];
 
-  todoTasks: MatTableDataSource<TodoTask>;
+  /**
+   * The todo tasks datasource for table
+   */
+  todoTasksDataSource: MatTableDataSource<TodoTask>;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
+  /**
+   * Query types for dropdown list
+   */
   listQueryTypes = [
     { value: ListQueryType.All, viewValue: "All" },
     { value: ListQueryType.InProgress, viewValue: "In progress" },
     { value: ListQueryType.Done, viewValue: "Done" }
   ]
 
+  /**
+   * Selected query type from dropdown list
+   */
   selectedQueryType = ListQueryType.All;
 
+  /**
+   * The query string for table filtering
+   */
+  queryString = "";
+
+  /**
+   * Material UI paginator
+   */
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  /**
+   * Material UI sort
+   */
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  /**
+   * The constructor
+   * @param todoTaskService The todo task service
+   * @param dialog The Material UI dialog
+   * @param snackBar The Material UI snackbar
+   */
   constructor(
     private todoTaskService: TodoTaskService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
 
+  /**
+   * OnInit lifecycle method
+   */
   ngOnInit(): void {
     this.queryRecords();
   }
 
+  /**
+   * Event for handle filtering
+   */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.todoTasks.filter = filterValue.trim().toLowerCase();
+    this.todoTasksDataSource.filter = filterValue.trim().toLowerCase();
+    this.queryString = filterValue.trim().toLowerCase();
 
-    if (this.todoTasks.paginator) {
-      this.todoTasks.paginator.firstPage();
+    if (this.todoTasksDataSource.paginator) {
+      this.todoTasksDataSource.paginator.firstPage();
     }
   }
 
+  /**
+   * event for handle query type change
+   */
   onQueryTypeChange() {
     this.queryRecords();
   }
 
+  /**
+   * Method for handle query records
+   */
   queryRecords() {
     this.todoTaskService.getForListByQueryType(this.selectedQueryType).subscribe((data: Array<TodoTask>) => {
-      this.todoTasks = new MatTableDataSource<TodoTask>(data);
-      this.todoTasks.paginator = this.paginator;
-      this.todoTasks.sort = this.sort;
+      this.todoTasksDataSource = new MatTableDataSource<TodoTask>(data);
+      this.todoTasksDataSource.paginator = this.paginator;
+      this.todoTasksDataSource.sort = this.sort;
+
+      if (this.queryString && this.queryString.length > 0) {
+        this.todoTasksDataSource.filter = this.queryString.toLowerCase();
+        if (this.todoTasksDataSource.paginator) {
+          this.todoTasksDataSource.paginator.firstPage();
+        }
+      }
     }, () => {
-      console.log("Error at calling api");
+      this.openSnackBar("Error occured at data loading.", "Close");
     });
   }
 
+  /**
+   * Event handler for delete todo
+   * @param id The todo task id
+   */
   openDeleteDialog(id: number) {
     const dialogRef = this.dialog.open(TodoDeleteDialogComponent);
 
@@ -79,6 +133,10 @@ export class TodoTaskListComponent implements OnInit {
     });
   }
 
+  /**
+   * Event handler for setting done todo
+   * @param id The todo task id
+   */
   openSetDoneDialog(id: number) {
     const dialogRef = this.dialog.open(TodoSetDoneDialogComponent);
 
@@ -94,6 +152,11 @@ export class TodoTaskListComponent implements OnInit {
     });
   }
 
+  /**
+   * Method for opening a snackbar
+   * @param message The message string
+   * @param action The action string
+   */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
