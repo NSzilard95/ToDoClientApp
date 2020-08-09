@@ -47,8 +47,8 @@ export class TodoTaskEditComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.id = +params.get("id");
-    })
+      this.id = +params.get('id');
+    });
   }
 
   /**
@@ -58,11 +58,12 @@ export class TodoTaskEditComponent implements OnInit {
     this.todoEditForm = this.formBuilder.group({
       todoText: ['', Validators.required]
     });
+
     this.todoTaskService.getById(this.id).subscribe((data: TodoTask) => {
       this.entity = data;
       this.todoEditForm.setValue({todoText: data.text});
     }, () => {
-      this.openSnackBar("Error occured at data loading.", "Close");
+      this.openSnackBar('Error occured at data loading.', 'Close');
     });
   }
 
@@ -79,12 +80,12 @@ export class TodoTaskEditComponent implements OnInit {
 
     this.todoTaskService.edit(this.entity).subscribe((data) => {
       this.loading = false;
-      this.openSnackBar("Todo is modified", "Close");
+      this.openSnackBar('Todo is modified', 'Close');
       this.router.navigate(['todo']);
     }, () => {
       this.loading = false;
-      this.openSnackBar("Error occured during modify.", "Close");
-    })
+      this.openSnackBar('Error occured during modify.', 'Close');
+    });
   }
 
   /**

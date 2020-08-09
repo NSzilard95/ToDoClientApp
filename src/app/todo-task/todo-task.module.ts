@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { TodoDeleteDialogComponent } from './todo-task-list/todo-delete-dialog/todo-delete-dialog.component';
 import { TodoSetDoneDialogComponent } from './todo-task-list/todo-set-done-dialog/todo-set-done-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CoreModule } from '../core/core.module';
 
 
 @NgModule({
@@ -14,7 +13,6 @@ import { CoreModule } from '../core/core.module';
   imports: [
     CommonModule,
     TodoTaskRoutingModule,
-    CoreModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule

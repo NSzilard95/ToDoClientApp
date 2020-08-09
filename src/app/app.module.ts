@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodoTaskModule } from './todo-task/todo-task.module';
 import { CoreModule } from './core/core.module';
@@ -17,9 +16,8 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule,
-    TodoTaskModule,
-    CoreModule
+    CoreModule,
+    TodoTaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

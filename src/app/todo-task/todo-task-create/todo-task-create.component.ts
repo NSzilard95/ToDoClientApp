@@ -55,12 +55,12 @@ export class TodoTaskCreateComponent implements OnInit {
     this.loading = true;
 
     this.todoTaskService.create(this.formControls.todoText.value).subscribe((data) => {
-      this.openSnackBar("Todo is created", "Close");
+      this.openSnackBar('Todo is created', 'Close');
       this.router.navigate(['todo']);
     }, () => {
       this.loading = false;
-      this.openSnackBar("Error occured during create.", "Close");
-    })
+      this.openSnackBar('Error occured during create.', 'Close');
+    });
   }
 
   /**

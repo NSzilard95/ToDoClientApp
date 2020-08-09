@@ -30,10 +30,10 @@ export class TodoTaskListComponent implements OnInit {
    * Query types for dropdown list
    */
   listQueryTypes = [
-    { value: ListQueryType.All, viewValue: "All" },
-    { value: ListQueryType.InProgress, viewValue: "In progress" },
-    { value: ListQueryType.Done, viewValue: "Done" }
-  ]
+    { value: ListQueryType.All, viewValue: 'All' },
+    { value: ListQueryType.InProgress, viewValue: 'In progress' },
+    { value: ListQueryType.Done, viewValue: 'Done' }
+  ];
 
   /**
    * Selected query type from dropdown list
@@ -43,7 +43,7 @@ export class TodoTaskListComponent implements OnInit {
   /**
    * The query string for table filtering
    */
-  queryString = "";
+  queryString = '';
 
   /**
    * Material UI paginator
@@ -110,7 +110,7 @@ export class TodoTaskListComponent implements OnInit {
         }
       }
     }, () => {
-      this.openSnackBar("Error occured at data loading.", "Close");
+      this.openSnackBar('Error occured at data loading.', 'Close');
     });
   }
 
@@ -124,10 +124,10 @@ export class TodoTaskListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result === true) {
         this.todoTaskService.delete(id).subscribe(() => {
-          this.openSnackBar("Todo deleted", "Close");
+          this.openSnackBar('Todo deleted', 'Close');
           this.queryRecords();
         }, () => {
-          this.openSnackBar("Error occured during delete.", "Close");
+          this.openSnackBar('Error occured during delete.', 'Close');
         });
       }
     });
@@ -143,10 +143,10 @@ export class TodoTaskListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result === true) {
         this.todoTaskService.setDone(id).subscribe(() => {
-          this.openSnackBar("Todo is done", "Close");
+          this.openSnackBar('Todo is done', 'Close');
           this.queryRecords();
         }, () => {
-          this.openSnackBar("Error occured during modify.", "Close");
+          this.openSnackBar('Error occured during modify.', 'Close');
         });
       }
     });
